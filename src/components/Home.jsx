@@ -1,12 +1,16 @@
+import {useState} from 'react';
 import MediaRow from './MediaRow';
+import SingleView from './SingleView';
 
 const Home = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const mediaArray = [
     {
       media_id: 8,
       user_id: 5,
-      filename: 'https://place-hold.it/1200x800.jpg&text=Pic1&fontsize=120',
-      thumbnail: 'http://place-hold.it/320/240.jpg&text=Thumb2&fontsize=20',
+      filename: 'https://picsum.photos/seed/picture1/1200/800',
+      thumbnail: 'https://picsum.photos/seed/thumb1/320/240',
       filesize: 170469,
       media_type: 'image/jpeg',
       title: 'Picture 1',
@@ -16,20 +20,19 @@ const Home = () => {
     {
       media_id: 9,
       user_id: 7,
-      filename: 'https://place-hold.it/800x600.jpg&text=Pic2&fontsize=72',
-      thumbnail: 'http://place-hold.it/320/240.jpg&text=Thumb3&fontsize=20',
+      filename: 'https://picsum.photos/seed/picture2/1200/800',
+      thumbnail: 'https://picsum.photos/seed/thumb2/320/240',
       filesize: 1002912,
       media_type: 'image/jpeg',
       title: 'Pic 2',
-      description: '',
+      description: 'This is another picture.',
       created_at: '2024-01-07T21:32:27.000Z',
     },
     {
       media_id: 17,
       user_id: 2,
-      filename:
-        'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4',
-      thumbnail: 'http://place-hold.it/320/240.jpg&text=Thumb1&fontsize=20',
+      filename: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      thumbnail: 'https://picsum.photos/seed/thumb3/320/240',
       filesize: 1236616,
       media_type: 'video/mp4',
       title: 'Bunny',
@@ -42,6 +45,10 @@ const Home = () => {
     <>
       <h2>My Media</h2>
 
+      {selectedItem && (
+        <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
+      )}
+
       <table>
         <thead>
           <tr>
@@ -51,12 +58,18 @@ const Home = () => {
             <th>Created</th>
             <th>Size</th>
             <th>Type</th>
+            <th>Action</th>
           </tr>
         </thead>
 
         <tbody>
           {mediaArray.map((item) => (
-            <MediaRow key={item.media_id} item={item} />
+            <MediaRow
+              key={item.media_id}
+              item={item}
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+            />
           ))}
         </tbody>
       </table>

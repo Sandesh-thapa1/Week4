@@ -19,7 +19,29 @@ th {
   background-color: lightgray;
 }
 
-img {
+td img {
   width: 120px;
   height: auto;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+dialog {
+  border: 1px solid black;
+  padding: 20px;
+  width: 60%;
+}
+
+dialog img,
+dialog video {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+dialog button {
+  margin-top: 15px;
 }
