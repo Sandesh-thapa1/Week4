@@ -1,15 +1,16 @@
 import {useLocation, useNavigate} from 'react-router';
+import SingleView from '../components/SingleView';
 
 const Single = () => {
-  const {state} = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const item = state?.item;
+  const item = location.state?.item;
 
   if (!item) {
     return (
       <>
-        <h2>No media selected</h2>
+        <p>No media selected.</p>
         <button onClick={() => navigate(-1)}>Go back</button>
       </>
     );
@@ -17,21 +18,11 @@ const Single = () => {
 
   return (
     <>
-      <h2>{item.title}</h2>
+      <SingleView item={item} />
 
-      <p>{item.description}</p>
-
-      {item.media_type.startsWith('image') ? (
-        <img src={item.filename} alt={item.title} />
-      ) : (
-        <video controls>
-          <source src={item.filename} type={item.media_type} />
-        </video>
-      )}
-
-      <br />
-
-      <button onClick={() => navigate(-1)}>Go back</button>
+      <div>
+        <button onClick={() => navigate(-1)}>Go back</button>
+      </div>
     </>
   );
 };
